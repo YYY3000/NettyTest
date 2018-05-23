@@ -34,7 +34,7 @@ public class SimpleInHandle2 extends ChannelInboundHandlerAdapter {
         ByteBuf encoded = ctx.alloc().buffer(4 * response.length());
         encoded.writeBytes(response.getBytes());
 
-        // 调用write方法则立即走outhandle
+        // 调用write方法则立即走第一个OutHandle的write方法或返回给客户端
         ctx.write(encoded);
         ctx.flush();
     }

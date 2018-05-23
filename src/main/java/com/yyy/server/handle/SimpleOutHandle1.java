@@ -31,6 +31,8 @@ public class SimpleOutHandle1 extends ChannelOutboundHandlerAdapter {
         // 在当前场景下，发送的数据必须转换成ByteBuf数组
         ByteBuf encoded = ctx.alloc().buffer(4 * message.length());
         encoded.writeBytes(message.getBytes());
+
+        // 调用write方法则立即走下一个OutHandle的write方法或返回给客户端
         ctx.write(encoded);
         ctx.flush();
     }
