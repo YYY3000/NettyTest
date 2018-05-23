@@ -18,6 +18,7 @@ public class SimpleClientHandle extends ChannelInboundHandlerAdapter {
         result.readBytes(result1);
         System.out.println("Server said:" + new String(result1));
         result.release();
+        ctx.close();
     }
 
     @Override
