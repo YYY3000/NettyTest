@@ -28,7 +28,11 @@ public class SimpleClientHandle extends ChannelInboundHandlerAdapter {
     }
 
 
-    // 连接成功后，向server发送消息
+    /**
+     * 连接成功后，向server发送消息
+     * @param ctx
+     * @throws Exception
+     */
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         String msg = "hello Server!";
