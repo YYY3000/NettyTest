@@ -42,5 +42,6 @@ public class SimpleServerHandle extends ChannelInboundHandlerAdapter {
     @Override
     public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
         ctx.flush();
+        ctx.close();
     }
 }
