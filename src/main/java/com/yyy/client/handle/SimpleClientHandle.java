@@ -12,7 +12,7 @@ public class SimpleClientHandle extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        System.out.println("SimpleClientHandler.channelRead");
+        // 读取server返回的信息
         ByteBuf result = (ByteBuf) msg;
         byte[] result1 = new byte[result.readableBytes()];
         result.readBytes(result1);
@@ -36,7 +36,7 @@ public class SimpleClientHandle extends ChannelInboundHandlerAdapter {
      */
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        String msg = "hello Server!";
+        String msg = "Hello Server!";
         ByteBuf encoded = ctx.alloc().buffer(4 * msg.length());
         encoded.writeBytes(msg.getBytes());
         ctx.write(encoded);

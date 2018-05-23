@@ -1,13 +1,11 @@
 package com.yyy.server;
 
-import com.yyy.server.handle.SimpleServerHandle;
+import com.yyy.channel.SimpleChannel;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
-import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 
 /**
@@ -33,13 +31,7 @@ public class SimpleServer {
             b.group(bossGroup, workerGroup)
                     //配置 Channel
                     .channel(NioServerSocketChannel.class)
-                    .childHandler(new ChannelInitializer<SocketChannel>() {
-                        @Override
-                        public void initChannel(SocketChannel ch) throws Exception {
-                            // 注册handler
-                            ch.pipeline().addLast(new SimpleServerHandle());
-                        }
-                    })
+                    .childHandler(new SimpleChannel())
                     .option(ChannelOption.SO_BACKLOG, 128)
                     .childOption(ChannelOption.SO_KEEPALIVE, true);
 

@@ -1,17 +1,19 @@
 package com.yyy.server.handle;
 
+import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
 /**
  * @author yinyiyun
- * @date 2018/5/23 10:59
+ * @date 2018/5/23 13:48
  */
-public class SimpleServerHandle extends ChannelInboundHandlerAdapter {
+public class SimpleInHandle1 extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        System.out.println("===SimpleServerHandle=== channelRead");
+
+        System.out.println("===SimpleInHandle1=== channelRead");
 
 //        ByteBuf result = (ByteBuf) msg;
 //        // msg中存储的是ByteBuf类型的数据，把数据读取到byte[]中
@@ -19,13 +21,14 @@ public class SimpleServerHandle extends ChannelInboundHandlerAdapter {
 //        result.readBytes(result1);
 //
 //        // 接收并打印客户端的信息
-//        System.out.println("SimpleServerHandle Client said:" + new String(result1));
+//        System.out.println("SimpleInHandle1 Client said:" + new String(result1));
 //
 //        // 释放资源，这行很关键
 //        result.release();
 //
+//
 //        // 向客户端发送消息
-//        String response = "SimpleServerHandle hello client! \n";
+//        String response = "SimpleInHandle1 hello client! \n";
 //
 //        // 在当前场景下，发送的数据必须转换成ByteBuf数组
 //        ByteBuf encoded = ctx.alloc().buffer(4 * response.length());
@@ -44,7 +47,7 @@ public class SimpleServerHandle extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
-        System.out.println("===SimpleServerHandle=== channelReadComplete");
+        System.out.println("===SimpleInHandle1=== channelReadComplete");
         ctx.flush();
         super.channelReadComplete(ctx);
     }
