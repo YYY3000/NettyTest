@@ -33,6 +33,8 @@ public class SimpleInHandle2 extends ChannelInboundHandlerAdapter {
         // 在当前场景下，发送的数据必须转换成ByteBuf数组
         ByteBuf encoded = ctx.alloc().buffer(4 * response.length());
         encoded.writeBytes(response.getBytes());
+
+        // 调用write方法则立即走outhandle
         ctx.write(encoded);
         ctx.flush();
     }

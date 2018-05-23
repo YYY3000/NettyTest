@@ -14,11 +14,13 @@ public class SimpleChannel extends ChannelInitializer<SocketChannel> {
     @Override
     protected void initChannel(SocketChannel ch) throws Exception {
         ChannelPipeline pipeline = ch.pipeline();
-        pipeline.addLast(new SimpleServerHandle());
-        pipeline.addLast(new SimpleInHandle1());
 
+        // outhandle 必须至少在一个inhandle之前 否则不执行
         pipeline.addLast(new SimpleOutHandle1());
         pipeline.addLast(new SimpleOutHandle2());
+
+        pipeline.addLast(new SimpleServerHandle());
+        pipeline.addLast(new SimpleInHandle1());
         pipeline.addLast(new SimpleInHandle2());
     }
 }
