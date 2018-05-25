@@ -1,6 +1,5 @@
 package com.yyy.simple.server.handle;
 
-import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelOutboundHandlerAdapter;
 import io.netty.channel.ChannelPromise;
@@ -15,23 +14,11 @@ public class SimpleOutHandle2 extends ChannelOutboundHandlerAdapter {
     public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) throws Exception {
         System.out.println("===SimpleOutHandle2=== write");
 
-        ByteBuf result = (ByteBuf) msg;
-        // msg中存储的是ByteBuf类型的数据，把数据读取到byte[]中
-        byte[] result1 = new byte[result.readableBytes()];
-        result.readBytes(result1);
-
-        String message = new String(result1);
         // 接收并打印客户端的信息
-        System.out.println("SimpleOutHandle1 Server send:" + message);
+        System.out.println("SimpleOutHandle1 Server send:" + msg);
 
-        // 释放资源，这行很关键
-        result.release();
-
-        message = "SimpleOutHandle1 " + message;
-        // 在当前场景下，发送的数据必须转换成ByteBuf数组
-        ByteBuf encoded = ctx.alloc().buffer(4 * message.length());
-        encoded.writeBytes(message.getBytes());
-        ctx.write(encoded);
+        msg = "SimpleOutHandle1 " + msg;
+        ctx.write(msg);
         ctx.flush();
     }
 
