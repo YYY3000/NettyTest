@@ -1,6 +1,6 @@
-package com.yyy.channel;
+package com.yyy.simple.channel;
 
-import com.yyy.server.handle.*;
+import com.yyy.simple.server.handle.*;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;

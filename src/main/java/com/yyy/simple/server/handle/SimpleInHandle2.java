@@ -1,4 +1,4 @@
-package com.yyy.server.handle;
+package com.yyy.simple.server.handle;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -9,7 +9,6 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
  * @date 2018/5/23 13:48
  */
 public class SimpleInHandle2 extends ChannelInboundHandlerAdapter {
-
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {

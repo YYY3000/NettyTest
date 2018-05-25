@@ -1,6 +1,6 @@
-package com.yyy.server;
+package com.yyy.simple.server;
 
-import com.yyy.channel.SimpleChannel;
+import com.yyy.simple.channel.SimpleChannel;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelOption;

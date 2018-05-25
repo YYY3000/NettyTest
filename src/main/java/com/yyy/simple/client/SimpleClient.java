@@ -1,6 +1,6 @@
-package com.yyy.client;
+package com.yyy.simple.client;
 
-import com.yyy.client.handle.SimpleClientHandle;
+import com.yyy.simple.client.handle.SimpleClientHandle;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
