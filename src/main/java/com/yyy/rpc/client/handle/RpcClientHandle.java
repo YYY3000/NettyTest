@@ -1,5 +1,6 @@
 package com.yyy.rpc.client.handle;
 
+import com.yyy.base.RpcResponse;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
@@ -9,14 +10,19 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
  */
 public class RpcClientHandle extends ChannelInboundHandlerAdapter {
 
+    private RpcResponse response;
+
+    public RpcClientHandle() {
+    }
+
+    public Object getResult() {
+        return response.getResult();
+    }
+
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         // 读取server返回的信息
-//        ByteBuf result = (ByteBuf) msg;
-//        byte[] result1 = new byte[result.readableBytes()];
-//        result.readBytes(result1);
-//        System.out.println("Server said:" + new String(result1));
-//        result.release();
+        response = (RpcResponse) msg;
         ctx.close();
     }
 
@@ -25,21 +31,6 @@ public class RpcClientHandle extends ChannelInboundHandlerAdapter {
         // 当出现异常就关闭连接
         cause.printStackTrace();
         ctx.close();
-    }
-
-
-    /**
-     * 连接成功后，向server发送消息
-     * @param ctx
-     * @throws Exception
-     */
-    @Override
-    public void channelActive(ChannelHandlerContext ctx) throws Exception {
-//        String msg = "Hello Server!";
-//        ByteBuf encoded = ctx.alloc().buffer(4 * msg.length());
-//        encoded.writeBytes(msg.getBytes());
-//        ctx.write(encoded);
-//        ctx.flush();
     }
 
 }

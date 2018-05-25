@@ -18,7 +18,7 @@ public class SimpleChannel extends ChannelInitializer<SocketChannel> {
     protected void initChannel(SocketChannel ch) throws Exception {
         ChannelPipeline pipeline = ch.pipeline();
 
-        ////添加对象解码器 禁止缓存类加载器
+        //添加对象解码器 禁止缓存类加载器
         pipeline.addLast(new ObjectDecoder(
                 1024 * 1024,
                 ClassResolvers.weakCachingConcurrentResolver(

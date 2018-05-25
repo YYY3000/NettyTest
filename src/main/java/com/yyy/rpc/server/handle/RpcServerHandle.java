@@ -1,7 +1,12 @@
 package com.yyy.rpc.server.handle;
 
+import com.yyy.base.RpcRequest;
+import com.yyy.base.RpcResponse;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+
+import java.lang.reflect.Method;
+import java.util.Map;
 
 /**
  * @author yinyiyun
@@ -9,23 +14,30 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
  */
 public class RpcServerHandle extends ChannelInboundHandlerAdapter {
 
+    private Map<String, Class> serviceMap;
+
+    public RpcServerHandle(Map<String, Class> serviceMap) {
+        this.serviceMap = serviceMap;
+    }
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+        RpcRequest request = (RpcRequest) msg;
+        RpcResponse response = invoke(request);
+        ctx.write(response);
+        ctx.flush();
+    }
 
-//        System.out.println("====== channelRead");
-//
-//        Person p = (Person) msg;
-//
-//        // 接收并打印客户端的信息
-//        System.out.println("SimpleInHandle2 Client said:" + p);
-//
-//        // 向客户端发送消息
-//        Person person = new Person("2", "yyy");
-//
-//        // 调用write方法则立即走第一个OutHandle的write方法或返回给客户端
-//        ctx.write(person);
-//        ctx.flush();
+    private RpcResponse invoke(RpcRequest request) throws Exception {
+        System.out.println(request.getClassName());
+        // 不能通过接口类名实例化实现类
+        Object claszz = serviceMap.get(request.getClassName()).newInstance();
+        Method method = claszz.getClass().getMethod(request.getMethodName(), request.getParameterTypes());
+        Object result = method.invoke(claszz, request.getParameters());
+        RpcResponse response = new RpcResponse();
+        response.setResult(result);
+        response.setRequestId(request.getRequestId());
+        return response;
     }
 
     @Override
