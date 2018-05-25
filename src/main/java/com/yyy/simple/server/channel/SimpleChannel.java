@@ -1,4 +1,4 @@
-package com.yyy.simple.channel;
+package com.yyy.simple.server.channel;
 
 import com.yyy.simple.server.handle.*;
 import io.netty.channel.ChannelInitializer;
